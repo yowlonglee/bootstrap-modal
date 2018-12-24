@@ -11,7 +11,9 @@
 </head>
 
 <body>
-  <div>Page content</div>
+  <div class="p-3">
+    <button class="btn btn-primary wham">Wham!</button>
+  </div>
   <div class="modal" tabindex="-1" role="dialog">
     <div class="modal-dialog" role="document">
       <div class="modal-content">
@@ -40,7 +42,16 @@
   <script src="modalExtend.js"></script>
   <script>
     $(document).ready(function () {
-      $(".modal").modalExtend();
+      var wham = function () {
+        var foo = function (message) {
+          console.log(message);
+        };
+        $(".modal").modalExtend({ title: "新標題" }, function () {
+          foo("wham!");
+        });
+        $(".modal").modal("show");
+      };
+      $(".wham").on("click", demo);
     });
   </script>
 </body>

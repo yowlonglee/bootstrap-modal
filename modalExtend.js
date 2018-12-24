@@ -1,13 +1,29 @@
 (function ($) {
   $.fn.modalExtend = function (options, callback) {
-    var options = options || false;
+    if(!options){
+      console.log("options is undefined");
+      return;
+    }
     var callback = callback || false;
-    console.log(this);
 
-    // custom values
-    var message = options.message || false;
-    var primary = options.primary || "確定";
-    var secondary = options.secondary || "取消";
+
+    this.find(".message").html(options.message);
+    if(options.title){
+      this.find(".modal-title").html(options.title);
+    }
+    if(options.primary){
+      this.find(".modal-footer button.primary").html(options.primary);
+    }
+    if(options.secondary){
+      this.find(".modal-footer button.secondary").html(options.secondary);
+    }
+
+    if(callback){
+      this.on("click", ".modal-footer button.primary", function(event){
+        callback();
+        $(event.delegateTarget).modal("hide");
+      });
+    }
 
     return this;
   };
